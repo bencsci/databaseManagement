@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Show Tables</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            padding: 8px 0px; 
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        caption {
+            font-weight: bold;
+            text-align: left;
+            font-size: 1.2em;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        p {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <form action="/show-tables" method="post">
+        Table: <input type="text" name="table">
+        <input type="submit" value="Show">
+    </form>
+    {% if table_data %}
+        <table>
+            <caption>{{ table_name }}</caption>
+            <thead>
+                <tr>
+                    {% for key in table_data[0].keys() %}
+                        <th>{{ key }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in table_data %}
+                    <tr>
+                        {% for value in row.values() %}
+                            <td>{{ value }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Enter the name of the desired table, and the contents will be displayed here.</p>
+    {% endif %}
+    <a href="/">Back to Home</a>
+</body>
+</html>
+

@@ -1,0 +1,41 @@
+<!-- annual_expenses.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Annual Expenses for Parts</title>
+</head>
+<body>
+    <h1>Annual Expenses for Parts</h1>
+    <form action="/annual-expenses" method="post">
+        <label for="start_year">Start Year:</label>
+        <input type="number" id="start_year" name="start_year" required>
+        <label for="end_year">End Year:</label>
+        <input type="number" id="end_year" name="end_year" required>
+        <button type="submit">Calculate</button>
+    </form>
+    <hr>
+    {% if start_year and end_year %}
+        <h2>Annual Expenses from {{ start_year }} to {{ end_year }}</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>Total Expenses</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in expenses_data %}
+                    <tr>
+                        <td>{{ item[0] }}</td>
+                        <td>{{ item[1] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    <a href="/">Back to Home</a>
+</body>
+</html>
+

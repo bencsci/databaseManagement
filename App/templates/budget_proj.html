@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Budget Projections</title>
+</head>
+<body>
+    <h1>Future Budget Projections</h1>
+    <form action="/budget-proj" method="post">
+        <label for="nYears">Enter N years in the future:</label>
+        <input type="number" id="nYears" name="nYears" required>
+        <label for="inf_rate">Enter inflation rate (Ex 2.8% entered as 0.028):</label>
+        <input type="number" step="0.001" id="inf_rate" name="inf_rate" required>
+        <button type="submit">Calculate</button>
+    </form>
+    <hr>
+    {% if nYears and year is not none and total_expenses is not none %}
+        <h2>Projection for Budgets from {{ year + 1 }} to {{ year + nYears }}</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>Predicted Budget</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for key,value in futureData.items() %}
+                    <tr>
+                        <td>{{ key }}</td>
+                        <td>{{ value }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    <a href="/">Back to Home</a>
+</body>
+</html>
+
